@@ -1,5 +1,5 @@
 
-export GBCPROJECT=../gbc-1.00.39
+export GBCPROJECT=../gbc-current-project
 export CUSTOMNAME=$(shell basename $(PWD))
 DISTBIN=../distbin
 GBCBASE=..

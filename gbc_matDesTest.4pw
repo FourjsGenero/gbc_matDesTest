@@ -86,6 +86,7 @@
       </VirtualFolder>
       <VirtualFolder label="sass">
         <File filePath="mygbc/sass/customization.scss"/>
+        <File filePath="mygbc/sass/main.scss"/>
         <File filePath="mygbc/sass/MyHeaderBarWidget.scss"/>
         <File filePath="mygbc/sass/MyMainContainerWidget.scss"/>
       </VirtualFolder>
