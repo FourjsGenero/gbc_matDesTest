@@ -1,0 +1,154 @@
+
+ACTION DEFAULTS
+	ACTION showform ( TEXT="Show Form", IMAGE="fa-desktop" )
+	ACTION msg ( TEXT="Message", IMAGE="fa-info-circle" )
+	ACTION err ( TEXT="Error", IMAGE="fa-exclamation-circle" )
+	ACTION win ( TEXT="Model Window", IMAGE="fa-square-o" )
+	ACTION wintitle ( TEXT="Window Title", IMAGE="fa-square" )
+	ACTION dyntext ( TEXT="Dynamic Text", IMAGE="fa-square" )
+	ACTION darklogo ( TEXT="Dark Logo", IMAGE="fa-square" )
+	ACTION lightlogo ( TEXT="Light Logo", IMAGE="fa-square" )
+	ACTION uitext ( TEXT="UI Text", IMAGE="fa-square" )
+	ACTION pg ( TEXT="ProgressBar", IMAGE="fa-toggle-right" )
+	ACTION pg50 ( TEXT="Prog Bar 50", IMAGE="fa-battery-half" )
+	ACTION inactive ( TEXT="Inactive", IMAGE="fa-eye-slash" )
+END -- AD
+
+TOPMENU
+	GROUP file (TEXT="File")
+		COMMAND showform
+		COMMAND inactive
+		COMMAND quit
+	END -- FIle
+	GROUP edit (TEXT="Edit")
+		COMMAND editcut
+		COMMAND editcopy
+		COMMAND editpaste
+	END -- FIle
+	GROUP opt (TEXT="Option")
+		COMMAND msg
+		COMMAND err
+		COMMAND win
+		COMMAND wintitle
+		COMMAND dyntext
+		COMMAND darklogo
+		COMMAND lightlogo
+		COMMAND uitext
+		COMMAND pg
+		COMMAND pg50
+	END -- opt
+	GROUP help (TEXT="Help")
+		COMMAND about
+	END -- opt
+END -- TM
+
+TOOLBAR
+	ITEM quit
+	ITEM editcut
+	ITEM editcopy
+	ITEM editpaste
+	ITEM showform
+	ITEM inactive
+	ITEM msg
+	ITEM err
+	ITEM win
+	ITEM pg
+	ITEM pg50
+END -- TB
+
+LAYOUT ( STYLE="main2 gbc_footer" )
+HBOX ( SPLITTER )
+GRID
+{
+[lab1|f001      ]
+[lab2|f002           ]
+[lab3|f003           ]
+[lab4|f004      :a   ]
+<G g1                          >
+[lab5|f005         ]
+[lab6|f006           ]
+<                              >
+ more text outside of group.
+<T tab                         >
+ [a001               |a002    ]
+ [a001               |a002    ]
+ [a001               |a002    ]
+ [a001               |a002    ]
+ [a001               |a002    ]
+ [a001               |a002    ]
+<                              >
+[: :but1  :msg      :err    : :]
+}
+END -- GRID
+VBOX
+
+FOLDER
+PAGE p1 (TEXT="Page1", IMAGE="fa-smile-o")
+GRID
+{
+Some text on a page.
+------------------------
+[""]
+<G g2                   >
+ text in a group
+ Live Field: [p101     ]
+ Dead Field: [p102     ]
+<                       >
+}
+END -- GRID
+END -- PAGE
+PAGE p2 (TEXT="Page2", IMAGE="fa-frown-o")
+GRID
+{
+page 2 is almost empty
+<G "Logo in a group box"        >
+ [logo2                        ]
+}
+END -- GRID
+END -- PAGE
+END -- FOLDER
+GRID
+{
+[logo                         ]
+[pg                           ]
+}
+END -- GRID
+END -- VBOX
+END -- HBOX
+
+ATTRIBUTES
+
+GROUP g1 : g1, TEXT=%"A Group #1", GRIDCHILDRENINPARENT;
+GROUP g2 : g2, TEXT=%"A Group #2";
+
+LABEL lab1 : lab1, TEXT=%"ButtonEdit:",JUSTIFY=RIGHT;
+LABEL lab2 : lab2, TEXT=%"DateEdit:",JUSTIFY=RIGHT;
+LABEL lab3 : lab3, TEXT=%"Combo:",JUSTIFY=RIGHT;
+LABEL lab4 : lab4, TEXT=%"Readonly:",JUSTIFY=RIGHT;
+LABEL lab5 : lab5, TEXT=%"Live Field:",JUSTIFY=RIGHT;
+LABEL lab6 : lab6, TEXT=%"Dead Field:",JUSTIFY=RIGHT;
+
+BUTTONEDIT f001 = FORMONLY.fld1, ACTION=win;
+DATEEDIT f002 = FORMONLY.fld2;
+COMBOBOX f003 = FORMONLY.fld3, ITEMS=("Red","Blue","Green"), PLACEHOLDER=%"Pick a Colour";
+f004 = FORMONLY.fld4, NOENTRY;
+f005 = FORMONLY.fld5;
+f006 = FORMONLY.fld6, NOENTRY;
+p101 = FORMONLY.fld7;
+p102 = FORMONLY.fld8, NOENTRY;
+CHECKBOX a = FORMONLY.okay, VALUECHECKED=1, VALUEUNCHECKED=0, TEXT=%"Ok?";
+IMAGE logo : logo, IMAGE="logo_dark", SIZEPOLICY=INITIAL,STYLE="noborder center";
+IMAGE logo2 : logo2, IMAGE="logo_light", SIZEPOLICY=INITIAL,STYLE="noborder center";
+
+a001 = FORMONLY.col1, TITLE="Title1", IMAGECOLUMN=img;
+a002 = FORMONLY.col2, TITLE="Fld2";
+PHANTOM FORMONLY.img;
+
+PROGRESSBAR pg = FORMONLY.pg, VALUEMAX=10000;
+
+BUTTON but1 : quit;
+BUTTON msg : msg;
+BUTTON err: err;
+
+INSTRUCTIONS
+SCREEN RECORD arr ( FORMONLY.col1 THRU FORMONLY.img )

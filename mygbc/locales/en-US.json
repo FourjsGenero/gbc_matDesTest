@@ -1,0 +1,21 @@
+{
+  "gwc": {
+    "app": {
+      "ending": {
+        "title": "The application isn't running anymore"
+      }
+    },
+    "welcome": {
+      "history": "Recent applications",
+      "bookmark": "Favorites"
+    }
+  },
+  "mycusto": {
+    "window": {
+      "currentTitle": "Currently opened window title"
+    },
+    "session": {
+      "redirectionText": "Redirection to www.google.com in 10 seconds. Click here to go now."
+    }
+  }
+}

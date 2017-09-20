@@ -1,2 +1,2 @@
 # gbc_matDesTest
-Simple Genero Application to test custom GBC builds
+Simple Genero 3.10 Application to test custom GBC builds

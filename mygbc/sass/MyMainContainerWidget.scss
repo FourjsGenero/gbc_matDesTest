@@ -1,0 +1,21 @@
+.gbc_MyMainContainerWidget {
+
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0px;
+
+	position: relative;
+
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	> header {
+		padding: 0px;
+	}
+	> .containerElement {
+		flex: 1 1 0px;
+		position: relative;
+	}
+}
+

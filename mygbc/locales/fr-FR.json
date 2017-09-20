@@ -1,0 +1,10 @@
+{
+  "mycusto": {
+    "window": {
+      "currentTitle": "Titre de la fenêtre courante"
+    },
+    "session": {
+      "redirectionText": "Redirection vers www.google.com dans 10 secondes. Cliquez ici pour y aller directement."
+    }
+  }
+}
