@@ -1,4 +1,7 @@
 
+-- This program is testing basic GBC UI look-n-feel customizations.
+-- By: Neil J Martin ( neilm@4js.com )
+
 IMPORT os
 IMPORT FGL gl_lib
 &include "genero_lib.inc"
@@ -39,18 +42,17 @@ MAIN
 		LET l_arr[x].col2 = x
 		LET l_arr[x].img = "fa-smile-o"
 	END FOR
-
-	OPEN FORM f FROM "matDesTest"
-	DISPLAY FORM f
-
 	LET l_rec.fld1 = "Active"
 	LET l_rec.fld2 = TODAY
-	--LET l_rec.fld3 = "Red"
+	LET l_rec.fld3 = "Red"
 	LET l_rec.fld4 = "Inactive"
 	LET l_rec.fld5 = "Active"
 	LET l_rec.fld6 = "Inactive"
 	LET l_rec.fld7 = "Active"
 	LET l_rec.fld8 = "Inactive"
+
+	OPEN FORM f FROM "matDesTest"
+	DISPLAY FORM f
 
 	DIALOG ATTRIBUTE(UNBUFFERED)
 		INPUT BY NAME l_rec.* ATTRIBUTES( WITHOUT DEFAULTS )
@@ -74,9 +76,15 @@ MAIN
 		ON ACTION quit EXIT DIALOG
 		BEFORE DIALOG
 			CALL pg(DIALOG.getForm(), (PG_MAX / 2) )
+			IF ui.Interface.getFrontEndName() != "GBC" THEN
+				CALL DIALOG.setActionActive("darklogo",FALSE)
+				CALL DIALOG.setActionActive("lightlogo",FALSE)
+				CALL DIALOG.setActionActive("dyntext",FALSE)
+			END IF
 	END DIALOG
 END MAIN
 --------------------------------------------------------------------------------
+-- A simple modal window
 FUNCTION win()
 	OPEN WINDOW win WITH FORM "matDesTest_modal"
 	MENU
@@ -86,6 +94,7 @@ FUNCTION win()
 	CLOSE WINDOW win
 END FUNCTION
 --------------------------------------------------------------------------------
+-- Function just to cause everything to go inactive
 FUNCTION dummy()
 	MENU "dummy"
 		BEFORE MENU
@@ -98,6 +107,7 @@ FUNCTION dummy()
 	END MENU
 END FUNCTION
 --------------------------------------------------------------------------------
+-- ProgressBar tests
 FUNCTION pg(l_f ui.Form, l_just_set INTEGER)
 	DEFINE x SMALLINT
 	DEFINE l_dn om.DomNode
@@ -115,12 +125,14 @@ FUNCTION pg(l_f ui.Form, l_just_set INTEGER)
 	END IF
 END FUNCTION
 --------------------------------------------------------------------------------
+-- GBC ONLY - Dynamically replace HTML code
 FUNCTION gbc_replaceHTML(l_obj STRING, l_txt STRING)
 	DEFINE l_ret STRING
 	CALL ui.Interface.frontCall("mymodule","replace_html",[ l_obj, l_txt ], l_ret)
 	DISPLAY "l_ret:",l_ret
 END FUNCTION
 --------------------------------------------------------------------------------
+-- Show a list .42f files in a Window and allow them to be viewed
 FUNCTION showForm()
 	DEFINE l_path, l_file STRING
 	DEFINE l_handle INTEGER
@@ -144,6 +156,7 @@ FUNCTION showForm()
 	CLOSE WINDOW matDesTest_forms
 END FUNCTION
 --------------------------------------------------------------------------------
+-- Open a window with the pass form name
 FUNCTION showForm2(l_formName STRING)
 	OPEN WINDOW aform WITH FORM l_formName
 	MENU

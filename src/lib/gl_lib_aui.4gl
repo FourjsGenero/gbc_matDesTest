@@ -1,4 +1,7 @@
 
+-- Some Generic AUI library functions.
+-- By: Neil J Martin ( neilm@4js.com )
+
 IMPORT os
 IMPORT util
 

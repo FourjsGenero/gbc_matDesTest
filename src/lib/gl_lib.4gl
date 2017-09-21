@@ -258,26 +258,29 @@ END FUNCTION --}}}
 #+ Set the gl variables for application name and build number
 #+
 #+ @param l_app_name Appliciation Name
-#+ @param l_app_build Build No / SVN/CVS Revision
+#+ @param l_app_build Build No / GIT/SVN/CVS Revision
 FUNCTION gl_setAppInfo( l_app_name STRING, l_app_build STRING ) --{{{
 	DEFINE c base.Channel
+	DEFINE l_info_file STRING
 	IF l_app_name IS NULL THEN
+		LET l_info_file = "../etc/app_info.txt"
+		IF NOT os.path.exists(l_info_file) THEN LET l_info_file = "../etc/app_name.txt" END IF
 		LET c = base.Channel.create()
 		TRY
-			CALL c.openFile("../etc/app_info.txt","r")
+			CALL c.openFile(l_info_file,"r")
+			LET l_app_name = c.readLine()
+			LET l_app_build = c.readLine()
+			IF l_app_build IS NULL THEN
+				LET l_app_build = os.path.mtime(".") -- use bin date as a build time
+			END IF
+			CALL c.close()
 		CATCH
-			CALL c.openFile("../etc/app_name.txt","r")
+			GL_DBGMSG(0, "No ../etc/app_info.txt or app_name.txt found!")
 		END TRY
-		LET l_app_name = c.readLine()
-		LET l_app_build = c.readLine()
-		IF l_app_build IS NULL THEN
-			LET l_app_build = os.path.mtime(".") -- use bin date as a build time
-		END IF
-		CALL c.close()
 	END IF
 	LET gl_app_name = l_app_name
 	LET gl_app_build = l_app_build
-	GL_DBGMSG(0, "App: "||NVL(l_app_name,"NULL")||" Buiild: "||NVL(l_app_build,"NULL"))
+	GL_DBGMSG(0, "App: "||NVL(l_app_name,"NULL")||" Build: "||NVL(l_app_build,"NULL"))
 END FUNCTION --}}}
 --------------------------------------------------------------------------------
 #+ Form Initializer. Call automatically set setDefaultinitializer is used.
