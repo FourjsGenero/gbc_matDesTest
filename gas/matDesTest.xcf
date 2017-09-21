@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<APPLICATION Parent="defaultwa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.10/cfextwa.xsd">
+	<RESOURCE Id="res.path.my_demo" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
+	<EXECUTION>
+		<ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">$(res.path.my_demo)/etc</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="FGLIMAGEPATH">$(res.path.my_demo)/pics:$(res.fgldir)/lib/image2font.txt</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="DBDATE">DMY4/</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="FJS_GL_DBGLEV">0</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="SDIMDI">M</ENVIRONMENT_VARIABLE>
+	<PATH>$(res.path.my_demo)/bin</PATH>
+	<MODULE>matDesTest.42r</MODULE>
+	<WEB_COMPONENT_DIRECTORY>$(res.path.my_demo)/pics/webcomponents</WEB_COMPONENT_DIRECTORY>
+	</EXECUTION>
+	<UA_OUTPUT>
+		<PROXY>$(res.uaproxy.cmd)</PROXY>
+		<PUBLIC_IMAGEPATH>$(res.public.resources)</PUBLIC_IMAGEPATH>
+		<GWC-JS>mygbc</GWC-JS>
+	</UA_OUTPUT>
+</APPLICATION>

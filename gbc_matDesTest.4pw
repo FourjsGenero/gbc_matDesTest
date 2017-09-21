@@ -60,10 +60,13 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group label="matDesTest" language="Genero">
+  <Group environment="value:FGLIMAGEPATH=../pics:$(FGLDIR)/lib/image2font.txt" label="matDesTest" language="Genero">
     <Library binaryName="etc" id="-63677372" label="etc">
       <File filePath="etc/default.4ad"/>
       <File filePath="etc/default.4st"/>
+    </Library>
+    <Library binaryName="gas" id="430488831" label="gas">
+      <File filePath="gas/matDesTest.xcf"/>
     </Library>
     <Library binaryName="gl_lib" id="1326346188" label="gl_lib">
       <File filePath="src/lib/gl_lib.4gl"/>
@@ -94,6 +97,14 @@
     </Library>
   </Group>
   <Group label="Packages" language="Genero">
-    <Package binaryName="mygbc.zip" label="mygbc.zip" platform="GBC" rootDirectory="$(ProjectDir)/mygbc"/>
+    <Package binaryName="matDesTest" dependencies="1326346188,-2138836518,-63677372" label="matDesTest" platform="Genero Application Server">
+      <DynamicProperty name="packageId" value="matDesTest"/>
+      <DynamicProperty name="packageLabel" value="matDesTest"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/bin" label="bin" sourceDirectory="$(ProjectDir)/bin"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/etc" label="etc" sourceDirectory="$(ProjectDir)/etc"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin" label="gas" sourceDirectory="$(ProjectDir)/gas"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/pics" label="pics" sourceDirectory="$(ProjectDir)/pics"/>
+    </Package>
+    <Package binaryName="mygbc.zip" label="mygbc.zip" platform="GBC" rootDirectory="$(ProjectDir)/gbc-current-project/dist/customization/mygbc"/>
   </Group>
 </Project>
