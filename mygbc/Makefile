@@ -1,8 +1,8 @@
 
-export GBCPROJECT=../gbc-current-project
+export GBCPROJECT=/opt/fourjs/gbc-current-project
 export CUSTOMNAME=$(shell basename $(PWD))
-DISTBIN=../distbin
-GBCBASE=..
+GBCBASE=$(shell dirname $(PWD))
+DISTBIN=$(GBCBASE)/distbin
 FILES=$(shell find . -type f)
 
 all: $(DISTBIN)/$(CUSTOMNAME).build
@@ -19,9 +19,10 @@ $(DISTBIN):
 	mkdir $(DISTBIN)
 
 # Package our custom gbc
-$(DISTBIN)/$(CUSTOMNAME).zip: $(DISTBIN) $(GBCPROJECT)/dist/customization/$(CUSTOMNAME)
-	cd $(GBCPROJECT)/dist/customization/$(CUSTOMNAME) && zip -r ../../../$@ *
+$(DISTBIN)/$(CUSTOMNAME).zip: $(DISTBIN) $(DISTBIN)/$(CUSTOMNAME).build
+	cd $(GBCPROJECT)/dist/customization/$(CUSTOMNAME) && zip -r $@ *
 
 dev:
 	cd $(GBCPROJECT) && grunt --customization=customization/$(CUSTOMNAME) dev
 
+pack: $(DISTBIN)/$(CUSTOMNAME).zip

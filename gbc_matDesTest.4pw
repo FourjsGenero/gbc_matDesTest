@@ -82,6 +82,7 @@
   <Group label="mygbc" language="GBC" targetDirectory="$(ProjectDir)/distbin">
     <Library binaryName="mygbc" id="-768771372" label="mygbc" srcDirectory="$(ProjectDir)/mygbc" targetDirectory="$(ProjectDir)/distbin">
       <VirtualFolder label="js">
+        <File filePath="mygbc/js/MyFrontCall.js"/>
         <File filePath="mygbc/js/MyHeaderBarWidget.js"/>
         <File filePath="mygbc/js/MyHeaderBarWidget.tpl.html"/>
         <File filePath="mygbc/js/MyMainContainerWidget.js"/>
@@ -105,6 +106,6 @@
       <Directory destinationDirectory="$(ProjectDir)/bin" label="gas" sourceDirectory="$(ProjectDir)/gas"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/pics" label="pics" sourceDirectory="$(ProjectDir)/pics"/>
     </Package>
-    <Package binaryName="mygbc.zip" label="mygbc.zip" platform="GBC" rootDirectory="$(ProjectDir)/gbc-current-project/dist/customization/mygbc"/>
+    <Package binaryName="mygbc" label="mygbc" platform="GBC" rootDirectory="$(GBCPROJDIR)/dist/customization/mygbc"/>
   </Group>
 </Project>

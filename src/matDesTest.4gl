@@ -65,7 +65,7 @@ MAIN
 		ON ACTION wintitle CALL fgl_setTitle("My Window Title")
 		ON ACTION dyntext CALL gbc_replaceHTML("dyntext","Dynamic Text")
 		ON ACTION darklogo CALL gbc_replaceHTML("logocell","<img src='./resources/img/logo_dark.png'/>")
-		ON ACTION lightlogo CALL gbc_replaceHTML("logocell","<img src='./resources/img/logo.png'/>")
+		ON ACTION lightlogo CALL gbc_replaceHTML("logocell","<img src='./resources/img/logo_light.png'/>")
 		ON ACTION uitext CALL ui.Interface.setText("My UI Text")
 		ON ACTION pg CALL pg(DIALOG.getForm(), 0)
 		ON ACTION pg50 CALL pg(DIALOG.getForm(), (PG_MAX / 2) )
