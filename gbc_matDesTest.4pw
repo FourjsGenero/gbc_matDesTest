@@ -91,6 +91,7 @@
       <VirtualFolder label="sass">
         <File filePath="mygbc/sass/customization.scss"/>
         <File filePath="mygbc/sass/main.scss"/>
+        <File filePath="mygbc/sass/MyGroupWidget.scss"/>
         <File filePath="mygbc/sass/MyHeaderBarWidget.scss"/>
         <File filePath="mygbc/sass/MyMainContainerWidget.scss"/>
       </VirtualFolder>
@@ -106,6 +107,6 @@
       <Directory destinationDirectory="$(ProjectDir)/bin" label="gas" sourceDirectory="$(ProjectDir)/gas"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/pics" label="pics" sourceDirectory="$(ProjectDir)/pics"/>
     </Package>
-    <Package binaryName="mygbc" label="mygbc" platform="GBC" rootDirectory="$(GBCPROJDIR)/dist/customization/mygbc"/>
+    <Package binaryName="mygbc" dependencies="-768771372" label="mygbc" platform="GBC" rootDirectory="$(GBCPROJDIR)/dist/customization/mygbc"/>
   </Group>
 </Project>
