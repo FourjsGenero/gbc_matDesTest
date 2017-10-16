@@ -69,6 +69,7 @@
       <File filePath="gas/matDesTest.xcf"/>
     </Library>
     <Library binaryName="gl_lib" id="1326346188" label="gl_lib">
+      <File filePath="src/lib/genero_lib.inc"/>
       <File filePath="src/lib/gl_lib.4gl"/>
       <File filePath="src/lib/gl_lib_aui.4gl"/>
     </Library>

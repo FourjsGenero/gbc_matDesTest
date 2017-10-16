@@ -2,6 +2,10 @@
 <APPLICATION Parent="defaultwa"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.10/cfextwa.xsd">
+	<DESCRIPTION>
+		<SHORT>This is a test program</SHORT>
+		<LONG>This is a test program</LONG>
+	</DESCRIPTION>
 	<RESOURCE Id="res.path.my_demo" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
 	<EXECUTION>
 		<ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">$(res.path.my_demo)/etc</ENVIRONMENT_VARIABLE>
@@ -13,9 +17,9 @@
 	<MODULE>matDesTest.42r</MODULE>
 	<WEB_COMPONENT_DIRECTORY>$(res.path.my_demo)/pics/webcomponents</WEB_COMPONENT_DIRECTORY>
 	</EXECUTION>
-	<UA_OUTPUT>
+	<!--UA_OUTPUT>
 		<PROXY>$(res.uaproxy.cmd)</PROXY>
 		<PUBLIC_IMAGEPATH>$(res.public.resources)</PUBLIC_IMAGEPATH>
 		<GWC-JS>mygbc</GWC-JS>
-	</UA_OUTPUT>
+	</UA_OUTPUT-->
 </APPLICATION>

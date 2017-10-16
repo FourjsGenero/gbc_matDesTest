@@ -71,8 +71,10 @@ FUNCTION gl_init( l_mdi_sdi CHAR(1), l_key STRING, l_use_fi BOOLEAN) --{{{
 	OPTIONS ON TERMINATE SIGNAL CALL gl_appTerm
 
 	LET gl_dbgLev = fgl_getEnv("FJS_GL_DBGLEV") -- 0=None, 1=General, 2=All
+
+# Implements the debug level
 	IF gl_dbgLev IS NULL THEN LET gl_dbgLev = 0 END IF
-	GL_DBGMSG(1, "gl_init: Debug Level:"||gl_dbgLev)
+	GL_DBGMSG(1, "gl_init: Debug Level:"||gl_dbgLev) -- this is a debug messages.
 
 	LET l_desc = base.application.getResourceEntry("fglrun.localization.file.1.name")
 	IF l_desc IS NULL THEN
