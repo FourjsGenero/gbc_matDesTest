@@ -3,21 +3,24 @@ ACTION DEFAULTS
 	ACTION showform ( TEXT="Show Form", IMAGE="fa-desktop" )
 	ACTION msg ( TEXT="Message", IMAGE="fa-info-circle" )
 	ACTION err ( TEXT="Error", IMAGE="fa-exclamation-circle" )
-	ACTION win ( TEXT="Model Window", IMAGE="fa-square-o" )
+	ACTION win ( TEXT="Model Window", IMAGE="fa-circle" )
+	ACTION win_mess ( TEXT="Message Window", IMAGE="fa-info" )
 	ACTION wintitle ( TEXT="Window Title", IMAGE="fa-square" )
 	ACTION dyntext ( TEXT="Dynamic Text", IMAGE="fa-square" )
 	ACTION darklogo ( TEXT="Dark Logo", IMAGE="fa-square" )
 	ACTION lightlogo ( TEXT="Light Logo", IMAGE="fa-square" )
 	ACTION uitext ( TEXT="UI Text", IMAGE="fa-square" )
-	ACTION pg ( TEXT="ProgressBar", IMAGE="fa-toggle-right" )
-	ACTION pg50 ( TEXT="Prog Bar 50", IMAGE="fa-battery-half" )
+	ACTION pg ( TEXT="ProgressBar", IMAGE="fa-sliders-h" )
+	ACTION pg50 ( TEXT="Prog Bar 50", IMAGE="fa-battery-2" )
 	ACTION inactive ( TEXT="Inactive", IMAGE="fa-eye-slash" )
+	ACTION fc_ismob ( TEXT="isMobile", IMAGE="fa-mobile-phone" )
 END -- AD
 
 TOPMENU
 	GROUP file (TEXT="File")
 		COMMAND showform
 		COMMAND inactive
+		SEPARATOR
 		COMMAND quit
 	END -- FIle
 	GROUP edit (TEXT="Edit")
@@ -29,15 +32,15 @@ TOPMENU
 		COMMAND msg
 		COMMAND err
 		COMMAND win
+		COMMAND win_mess
 		COMMAND wintitle
-		COMMAND uitext
-		COMMAND pg
-		COMMAND pg50
-	END -- FIle
-	GROUP opt (TEXT="GBC Specific")
 		COMMAND dyntext
 		COMMAND darklogo
 		COMMAND lightlogo
+		COMMAND uitext
+		COMMAND pg
+		COMMAND pg50
+		COMMAND fc_ismob
 	END -- opt
 	GROUP help (TEXT="Help")
 		COMMAND about
@@ -46,26 +49,31 @@ END -- TM
 
 TOOLBAR
 	ITEM quit
+	SEPARATOR
 	ITEM editcut
 	ITEM editcopy
 	ITEM editpaste
+	SEPARATOR
 	ITEM showform
 	ITEM inactive
 	ITEM msg
 	ITEM err
+	ITEM win_mess
 	ITEM win
 	ITEM pg
 	ITEM pg50
 END -- TB
 
-LAYOUT ( STYLE="main2 gbc_footer" )
+LAYOUT ( STYLE="main2", TEXT="Material Design Test", IMAGE="fa-bug" ) -- gbc_footer" )
+VBOX ( STYLE="formborder" )
 HBOX ( SPLITTER )
 GRID
 {
 [lab1|f001      ]
-[lab2|f002           ]
-[lab3|f003           ]
-[lab4|f004      :a   ]
+[lab2|f002           ][a   ]
+[lab3|f003           ][b   ]
+[lab4|f004           ][c   ]
+[: :b1:but1  :msg    :err   : :]
 <G g1                          >
 [lab5|f005         ]
 [lab6|f006           ]
@@ -79,13 +87,73 @@ GRID
  [a001               |a002    ]
  [a001               |a002    ]
 <                              >
-[: :but1  :msg      :err    : :]
 }
 END -- GRID
 VBOX
 
+HBOX ( SPLITTER )
+
+FOLDER (STYLE="accordion")
+PAGE f2p1 (TEXT="Some Text", IMAGE="smiley")
+GRID
+{
+This folder is using the 'accordion' style
+The table in the tab below is using 'listview' style
+IMAGEPATH:
+[ip                                          ]
+[                                            ]
+Style File:
+[sf                                          ]
+[                                            ]
+}
+END -- GRID
+END -- PAGE
+PAGE f2p2 (TEXT="ListView", IMAGE="smiley", ACTION=arr2)
+GRID
+{
+<T tab2                                        >
+ [t201                   |t202                ]
+ [t201                   |t202                ]
+ [t201                   |t202                ]
+ [t201                   |t202                ]
+ [t201                   |t202                ]
+ [t201                   |t202                ]
+ [t201                   |t202                ]
+<                                              >
+ [tab2info                                    ]
+}
+END -- GRID
+
+END -- PAGE
+PAGE f2p3 (TEXT="Table 2", IMAGE="smiley", ACTION=arr3)
+GRID
+{
+<T tab3                                        >
+ [t301                   |t302                ]
+ [t301                   |t302                ]
+ [t301                   |t302                ]
+ [t301                   |t302                ]
+ [t301                   |t302                ]
+ [t301                   |t302                ]
+ [t301                   |t302                ]
+<                                              >
+ [tab3info                                    ]
+}
+END -- GRID
+END -- PAGE
+PAGE f2p4 (TEXT="A Group", IMAGE="smiley")
+GRID
+{
+<G "A Group"                               >
+ Some static text
+<                                          >
+}
+END -- GRID
+END -- PAGE
+END -- FOLDER
+
 FOLDER
-PAGE p1 (TEXT="Page1", IMAGE="fa-smile-o")
+PAGE p1 (TEXT="Page1", IMAGE="smiley")
 GRID
 {
 Some text on a page.
@@ -109,19 +177,25 @@ page 2 is almost empty
 END -- GRID
 END -- PAGE
 END -- FOLDER
-GRID
+
+END -- HBOX
+
+
+END -- VBOX
+END -- HBOX
+
+GRID ( STYLE="center" )
 {
 [logo                         ]
 [pg                           ]
 }
 END -- GRID
-END -- VBOX
-END -- HBOX
 
+END -- VBOX
 ATTRIBUTES
 
-GROUP g1 : g1, TEXT=%"A Group #1", GRIDCHILDRENINPARENT;
-GROUP g2 : g2, TEXT=%"A Group #2";
+GROUP g1 : g1, TEXT=%"A Group #1", GRIDCHILDRENINPARENT,STYLE="uncollapsed";
+GROUP g2 : g2, TEXT=%"A Group #2",STYLE="collapsed";
 
 LABEL lab1 : lab1, TEXT=%"ButtonEdit:",JUSTIFY=RIGHT;
 LABEL lab2 : lab2, TEXT=%"DateEdit:",JUSTIFY=RIGHT;
@@ -130,27 +204,50 @@ LABEL lab4 : lab4, TEXT=%"Readonly:",JUSTIFY=RIGHT;
 LABEL lab5 : lab5, TEXT=%"Live Field:",JUSTIFY=RIGHT;
 LABEL lab6 : lab6, TEXT=%"Dead Field:",JUSTIFY=RIGHT;
 
-BUTTONEDIT f001 = FORMONLY.fld1, ACTION=win;
-DATEEDIT f002 = FORMONLY.fld2;
-COMBOBOX f003 = FORMONLY.fld3, ITEMS=("Red","Blue","Green"), PLACEHOLDER=%"Pick a Colour";
+BUTTONEDIT f001 = FORMONLY.fld1, ACTION=win, TABINDEX=2;
+DATEEDIT f002 = FORMONLY.fld2, TABINDEX=3;
+COMBOBOX f003 = FORMONLY.fld3, ITEMS=("Red","Blue","Green"), PLACEHOLDER=%"Pick a Colour", TABINDEX=4;
 f004 = FORMONLY.fld4, NOENTRY;
-f005 = FORMONLY.fld5;
+f005 = FORMONLY.fld5, TABINDEX=5;
 f006 = FORMONLY.fld6, NOENTRY;
-p101 = FORMONLY.fld7;
+p101 = FORMONLY.fld7, TABINDEX=6;
 p102 = FORMONLY.fld8, NOENTRY;
-CHECKBOX a = FORMONLY.okay, VALUECHECKED=1, VALUEUNCHECKED=0, TEXT=%"Ok?";
+CHECKBOX a = FORMONLY.okay, VALUECHECKED=1, VALUEUNCHECKED=0, TEXT=%"Ok?", NOT NULL, TABINDEX=7;
+CHECKBOX b = FORMONLY.notokay, VALUECHECKED=1, VALUEUNCHECKED=0, TEXT=%"NOk?", NOT NULL, TABINDEX=8;
+CHECKBOX c = FORMONLY.nul, VALUECHECKED=1, VALUEUNCHECKED=0, TEXT=%"Nul?", TABINDEX=9;
 IMAGE logo : logo, IMAGE="logo_dark", SIZEPOLICY=INITIAL,STYLE="noborder center";
 IMAGE logo2 : logo2, IMAGE="logo_light", SIZEPOLICY=INITIAL,STYLE="noborder center";
 
+-- normal table
 a001 = FORMONLY.col1, TITLE="Title1", IMAGECOLUMN=img;
 a002 = FORMONLY.col2, TITLE="Fld2";
 PHANTOM FORMONLY.img;
 
 PROGRESSBAR pg = FORMONLY.pg, VALUEMAX=10000;
 
+BUTTON b1 : bomb, IMAGE="fa-bomb", TEXT="", TABINDEX=1;
 BUTTON but1 : quit;
 BUTTON msg : msg;
 BUTTON err: err;
 
+TEXTEDIT ip = FORMONLY.imgpath,STRETCH=X;
+TEXTEDIT sf = FORMONLY.stylefile,STRETCH=X;
+
+-- list view table
+TABLE tab2 : tab2, STYLE="listview";
+t201 = FORMONLY.lvcol1, SCROLL, IMAGECOLUMN=lvimg;
+t202 = FORMONLY.lvcol2, SCROLL;
+PHANTOM FORMONLY.lvimg;
+LABEL tab2info = FORMONLY.tab2info, STYLE="center";
+
+-- arr2 table
+TABLE tab3 : tab3, STYLE="table3";
+t301 = FORMONLY.a3col1, SCROLL, IMAGECOLUMN=a3img, TITLE="Column 1";
+t302 = FORMONLY.a3col2, SCROLL, TITLE="Column 2";
+PHANTOM FORMONLY.a3img;
+LABEL tab3info = FORMONLY.tab3info, STYLE="center";
+
 INSTRUCTIONS
-SCREEN RECORD arr ( FORMONLY.col1 THRU FORMONLY.img )
+SCREEN RECORD arr1 ( FORMONLY.col1 THRU FORMONLY.img )
+SCREEN RECORD arr2 ( FORMONLY.lvcol1 THRU FORMONLY.lvimg )
+SCREEN RECORD arr3 ( FORMONLY.a3col1 THRU FORMONLY.a3img )

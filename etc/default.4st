@@ -10,6 +10,9 @@ Property of Four Js*
 -->
 
 <StyleList>
+  <Style name="Folder.accordion">
+		<StyleAttribute name="position"  value="accordion" />
+  </Style>
 	<Style name=".hidden">
 		<StyleAttribute name="textColor" value="window" />
 		<StyleAttribute name="backgroundColor" value="window" />
